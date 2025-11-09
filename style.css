@@ -1,10 +1,5 @@
-/* Smooth scrolling helper (also set on <html> class) */
 html { scroll-behavior: smooth; }
-
-/* Better tap targets on mobile */
 button, a { -webkit-tap-highlight-color: transparent; }
-
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;
