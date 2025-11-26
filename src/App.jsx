@@ -1,38 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Shield,
@@ -71,8 +36,12 @@ import {
 
 /* SnowKnights Security - Single Page Application
   Theme: Dark, Cyber-Security, Media-Centric, Professional yet Creative
-  State: Final Version - Dark FAQ Restored & Strict Left Alignment
+  State: Final Version - Cleaned of Duplicate Exports/Imports
 */
+
+// --- SHARED LAYOUT CLASS ---
+// Ensures strict alignment across all sections
+const layoutClass = "w-full max-w-7xl mx-auto px-6";
 
 // --- Component: Hero Badge with Animated Text Switching ---
 const HeroBadge = () => {
@@ -146,7 +115,7 @@ const CyberShield = () => {
         </div>
       </div>
 
-      {/* Decorative Data Nodes - Adjusted for new size */}
+      {/* Decorative Data Nodes */}
       <div className="absolute top-8 right-4 flex flex-col gap-1 items-end opacity-60">
         <div className="w-12 h-[2px] bg-cyan-800"></div>
         <div className="w-8 h-[2px] bg-cyan-500/80 animate-pulse"></div>
@@ -324,11 +293,11 @@ const SnowKnightsApp = () => {
     }, 1500);
   };
 
-  // Updated Nav Links (About first, Process -> FAQ)
+  // Updated Nav Links
   const navLinks = [
     { name: 'Services', href: '#services' },
-    { name: 'About', href: '#mission' },
-    { name: 'FAQ', href: '#faq' },
+    { name: 'Process', href: '#services' },
+    { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -443,8 +412,8 @@ const SnowKnightsApp = () => {
 
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-4' : 'bg-transparent py-6'}`}>
-        {/* FIXED: max-w-7xl for wider consistency */}
-        <div className="container mx-auto px-6 max-w-7xl flex justify-between items-center">
+        {/* FIXED: layoutClass for consistent alignment */}
+        <div className={`${layoutClass} flex justify-between items-center`}>
           <a href="#" onClick={scrollToTop} className="text-2xl font-bold tracking-tighter flex items-center gap-2 hover:opacity-90 transition-opacity">
             <Shield className="w-8 h-8 text-cyan-400" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-indigo-500">
@@ -473,7 +442,7 @@ const SnowKnightsApp = () => {
             </a>
           </div>
 
-          {/* Mobile Nav Button - CHANGED TO text-cyan-400 FOR VISIBILITY */}
+          {/* Mobile Nav Button */}
           <button
             onClick={toggleMenu}
             className="md:hidden text-cyan-400"
@@ -510,10 +479,10 @@ const SnowKnightsApp = () => {
         )}
       </nav>
 
-      {/* Hero Section - LEFT ALIGNED CONTENT */}
-      <header className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 flex items-center min-h-screen overflow-hidden">
-        {/* FIXED: max-w-7xl for wider consistency */}
-        <div className="container mx-auto px-6 max-w-7xl relative z-10 flex flex-col md:flex-row items-center gap-16">
+      {/* Hero Section */}
+      <header className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 flex items-center min-h-screen overflow-hidden">
+        {/* FIXED: layoutClass */}
+        <div className={`${layoutClass} relative z-10 flex flex-col md:flex-row items-center gap-16`}>
           <div className="w-full md:w-1/2 text-left relative z-20">
             <div className="reveal-container mb-6" style={{ "--delay": "0.2s" }}>
               <div className="reveal-block"></div>
@@ -552,31 +521,24 @@ const SnowKnightsApp = () => {
             <div className="mt-12 pt-8 border-t border-slate-800/50 animate-fade-in-up animation-delay-400">
               <p className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-6">SECURING OPERATIONS FOR:</p>
               <div className="grid grid-cols-2 gap-4">
-                {/* Card 1: Post Production */}
                 <div className="bg-slate-900/60 border border-slate-700/50 p-4 rounded-xl flex items-center gap-4 hover:border-cyan-500/30 transition-colors group">
                   <div className="p-2.5 bg-blue-500/10 rounded-lg text-blue-400 group-hover:text-blue-300 transition-colors">
                     <Film className="w-5 h-5" />
                   </div>
                   <span className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">Post Production Pipelines</span>
                 </div>
-
-                {/* Card 2: VFX */}
                 <div className="bg-slate-900/60 border border-slate-700/50 p-4 rounded-xl flex items-center gap-4 hover:border-purple-500/30 transition-colors group">
                   <div className="p-2.5 bg-purple-500/10 rounded-lg text-purple-400 group-hover:text-purple-300 transition-colors">
                     <Zap className="w-5 h-5" />
                   </div>
                   <span className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">Visual Effects (VFX)</span>
                 </div>
-
-                {/* Card 3: Dubbing */}
                 <div className="bg-slate-900/60 border border-slate-700/50 p-4 rounded-xl flex items-center gap-4 hover:border-pink-500/30 transition-colors group">
                   <div className="p-2.5 bg-pink-500/10 rounded-lg text-pink-400 group-hover:text-pink-300 transition-colors">
                     <Mic className="w-5 h-5" />
                   </div>
                   <span className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">Dubbing</span>
                 </div>
-
-                {/* Card 4: Localization */}
                 <div className="bg-slate-900/60 border border-slate-700/50 p-4 rounded-xl flex items-center gap-4 hover:border-green-500/30 transition-colors group">
                   <div className="p-2.5 bg-green-500/10 rounded-lg text-green-400 group-hover:text-green-300 transition-colors">
                     <Globe className="w-5 h-5" />
@@ -587,7 +549,6 @@ const SnowKnightsApp = () => {
             </div>
           </div>
 
-          {/* New Creative Hero Visual: The Realistic Cyber Shield */}
           <div className="w-full md:w-1/2 flex justify-center items-center relative h-[400px] perspective-1000">
             <CyberShield />
           </div>
@@ -596,8 +557,8 @@ const SnowKnightsApp = () => {
 
       {/* The Problem / Mission */}
       <section id="mission" className="py-24 bg-slate-900/50 relative overflow-hidden">
-        {/* FIXED: max-w-7xl for consistent alignment */}
-        <div className="container mx-auto px-6 max-w-7xl">
+        {/* FIXED: layoutClass */}
+        <div className={layoutClass}>
           <div className="flex flex-col md:flex-row items-center gap-16">
             <div className="w-full md:w-1/2">
               <div className="reveal-container mb-6">
@@ -658,8 +619,8 @@ const SnowKnightsApp = () => {
 
       {/* Guardians Section */}
       <section className="py-24 bg-slate-950 border-y border-slate-900 relative">
-        {/* FIXED: max-w-7xl for consistent alignment */}
-        <div className="container mx-auto px-6 max-w-7xl">
+        {/* FIXED: layoutClass */}
+        <div className={layoutClass}>
           <div className="flex flex-col md:flex-row gap-12 items-start">
             <div className="w-full md:w-5/12">
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none mb-6 text-left">
@@ -697,8 +658,8 @@ const SnowKnightsApp = () => {
 
       {/* Services Grid */}
       <section id="services" className="py-24 relative">
-        {/* FIXED: max-w-7xl for consistent alignment */}
-        <div className="container mx-auto px-6 max-w-7xl">
+        {/* FIXED: layoutClass */}
+        <div className={layoutClass}>
           <div className="text-left mb-16 border-b border-slate-800 pb-8">
             <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-widest mb-2">Scope of Services</h2>
             <div className="reveal-container inline-block">
@@ -716,7 +677,6 @@ const SnowKnightsApp = () => {
                 <p className="text-slate-400 text-sm">End-to-end support for vendors to achieve TPN compliance, from readiness to official certification and AI governance.</p>
               </div>
               <div className="grid md:grid-cols-3 gap-6">
-                {/* Service 1: Readiness */}
                 <div className="group p-8 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-orange-500/50 transition-all hover:bg-slate-900/60 hover:-translate-y-1 flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 mb-4 group-hover:scale-110 transition-transform">
                     <FolderGit2 className="w-6 h-6" />
@@ -727,7 +687,6 @@ const SnowKnightsApp = () => {
                   </p>
                 </div>
 
-                {/* Service 2: Assessment */}
                 <div className="group p-8 rounded-2xl bg-slate-900/40 border border-cyan-500/30 hover:border-cyan-400 transition-all hover:bg-slate-900/60 hover:-translate-y-1 flex flex-col relative overflow-hidden">
                   <div className="absolute top-0 right-0 px-3 py-1 bg-cyan-500 text-xs font-bold text-black rounded-bl-lg">CORE</div>
                   <div className="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-110 transition-transform">
@@ -739,7 +698,6 @@ const SnowKnightsApp = () => {
                   </p>
                 </div>
 
-                {/* Service 3: AI Governance */}
                 <div className="group p-8 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-pink-500/50 transition-all hover:bg-slate-900/60 hover:-translate-y-1 flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 mb-4 group-hover:scale-110 transition-transform">
                     <Brain className="w-6 h-6" />
@@ -759,7 +717,6 @@ const SnowKnightsApp = () => {
                 <p className="text-slate-400 text-sm">We deploy a fractional Production Security Manager (PSM) to oversee projects from Greenlight to Distribution, serving as the single point of content security accountability.</p>
               </div>
               <div className="grid md:grid-cols-3 gap-6">
-                {/* Phase A: Pre-Production */}
                 <div className="group p-8 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-blue-500/50 transition-all hover:bg-slate-900/60 hover:-translate-y-1 flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 mb-4 group-hover:scale-110 transition-transform">
                     <FileText className="w-6 h-6" />
@@ -773,7 +730,6 @@ const SnowKnightsApp = () => {
                   </ul>
                 </div>
 
-                {/* Phase B: Physical Production */}
                 <div className="group p-8 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-blue-500/50 transition-all hover:bg-slate-900/60 hover:-translate-y-1 flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 mb-4 group-hover:scale-110 transition-transform">
                     <MapPin className="w-6 h-6" />
@@ -787,7 +743,6 @@ const SnowKnightsApp = () => {
                   </ul>
                 </div>
 
-                {/* Phase C: Post-Production */}
                 <div className="group p-8 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-blue-500/50 transition-all hover:bg-slate-900/60 hover:-translate-y-1 flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 mb-4 group-hover:scale-110 transition-transform">
                     <ShieldCheck className="w-6 h-6" />
@@ -808,8 +763,8 @@ const SnowKnightsApp = () => {
 
       {/* NEW: How We Can Help (Future Scenarios) */}
       <section className="py-24 bg-slate-900/30 border-t border-slate-900">
-        {/* FIXED: max-w-7xl for consistent alignment */}
-        <div className="container mx-auto px-6 max-w-7xl">
+        {/* FIXED: layoutClass */}
+        <div className={layoutClass}>
           <div className="text-left mb-16 border-b border-slate-800 pb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-4">
               <Briefcase className="w-3 h-3" /> Case Studies
@@ -823,7 +778,7 @@ const SnowKnightsApp = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* NEW CARD: Official TPN Assessment (Featured) */}
+            {/* Cards Content... */}
             <div className="relative p-8 rounded-3xl bg-[#0B0F19] border border-orange-500/20 hover:border-orange-500/50 transition-all group flex flex-col h-full md:col-span-2 overflow-hidden">
               <div className="absolute top-0 right-0 px-4 py-1.5 bg-orange-500 text-black text-xs font-bold rounded-bl-xl z-20 shadow-lg">For Vendors</div>
               <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity z-0">
@@ -856,7 +811,6 @@ const SnowKnightsApp = () => {
               </div>
             </div>
 
-            {/* Scenario 1: VFX */}
             <div className="relative p-8 rounded-3xl bg-[#0B0F19] border border-slate-800 hover:border-purple-500/30 transition-all group flex flex-col h-full overflow-hidden">
               <div className="absolute top-0 right-0 px-4 py-1.5 bg-purple-500 text-white text-xs font-bold rounded-bl-xl z-20 shadow-lg">For Vendors</div>
               <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity z-0">
@@ -864,32 +818,13 @@ const SnowKnightsApp = () => {
               </div>
               <h3 className="text-2xl font-bold text-purple-400 mb-1 relative z-10">VFX Studio Security</h3>
               <h4 className="text-white font-bold text-lg mb-6 relative z-10">"The Invisible Leak"</h4>
-
               <div className="space-y-5 flex-1 relative z-10">
-                <div>
-                  <p className="text-white font-bold mb-1">Challenge:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    A VFX house expanding its remote workforce may need to enable 50+ artists to work on high-stakes shots without exposing raw assets to unsecure home networks.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-white font-bold mb-1">Risk:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    Unsecured remote endpoints and lack of VDI controls could lead to asset theft or leak of pre-release footage.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-white font-bold mb-1">SnowKnights:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    We could architect a zero-trust VDI environment where pixels stream but data never leaves the secure server core.
-                  </p>
-                </div>
+                <div><p className="text-white font-bold mb-1">Challenge:</p><p className="text-slate-400 text-sm leading-relaxed">A VFX house expanding its remote workforce may need to enable 50+ artists to work on high-stakes shots without exposing raw assets to unsecure home networks.</p></div>
+                <div><p className="text-white font-bold mb-1">Risk:</p><p className="text-slate-400 text-sm leading-relaxed">Unsecured remote endpoints and lack of VDI controls could lead to asset theft or leak of pre-release footage.</p></div>
+                <div><p className="text-white font-bold mb-1">SnowKnights:</p><p className="text-slate-400 text-sm leading-relaxed">We could architect a zero-trust VDI environment where pixels stream but data never leaves the secure server core.</p></div>
               </div>
             </div>
 
-            {/* Scenario 2: Studio Production Shield (Replaces Creative Agency) */}
             <div className="relative p-8 rounded-3xl bg-[#0B0F19] border border-slate-800 hover:border-blue-500/30 transition-all group flex flex-col h-full overflow-hidden">
               <div className="absolute top-0 right-0 px-4 py-1.5 bg-blue-500 text-white text-xs font-bold rounded-bl-xl z-20 shadow-lg">For Studios</div>
               <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity z-0">
@@ -897,32 +832,13 @@ const SnowKnightsApp = () => {
               </div>
               <h3 className="text-2xl font-bold text-blue-400 mb-1 relative z-10">Studio Production Shield</h3>
               <h4 className="text-white font-bold text-lg mb-6 relative z-10">"End-to-End Guardianship"</h4>
-
               <div className="space-y-5 flex-1 relative z-10">
-                <div>
-                  <p className="text-white font-bold mb-1">Challenge:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    A studio managing a high-profile production from greenlight to distribution needs to ensure strict security consistency across hundreds of crew and multiple vendors.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-white font-bold mb-1">Risk:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    Fragmentation of security protocols between on-set teams and post-vendors, leading to script leaks or dailies piracy.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-white font-bold mb-1">SnowKnights:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    We could deploy a fractional Production Security Manager (PSM) to serve as the single point of accountability, managing crew vetting, script chain-of-custody, and physical perimeter defense.
-                  </p>
-                </div>
+                <div><p className="text-white font-bold mb-1">Challenge:</p><p className="text-slate-400 text-sm leading-relaxed">A studio managing a high-profile production from greenlight to distribution needs to ensure strict security consistency across hundreds of crew and multiple vendors.</p></div>
+                <div><p className="text-white font-bold mb-1">Risk:</p><p className="text-slate-400 text-sm leading-relaxed">Fragmentation of security protocols between on-set teams and post-vendors, leading to script leaks or dailies piracy.</p></div>
+                <div><p className="text-white font-bold mb-1">SnowKnights:</p><p className="text-slate-400 text-sm leading-relaxed">We could deploy a fractional Production Security Manager (PSM) to serve as the single point of accountability, managing crew vetting, script chain-of-custody, and physical perimeter defense.</p></div>
               </div>
             </div>
 
-            {/* Scenario 3: Localization */}
             <div className="relative p-8 rounded-3xl bg-[#0B0F19] border border-slate-800 hover:border-green-500/30 transition-all group flex flex-col h-full overflow-hidden">
               <div className="absolute top-0 right-0 px-4 py-1.5 bg-green-500 text-black text-xs font-bold rounded-bl-xl z-20 shadow-lg">For Vendors</div>
               <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity z-0">
@@ -930,32 +846,13 @@ const SnowKnightsApp = () => {
               </div>
               <h3 className="text-2xl font-bold text-green-400 mb-1 relative z-10">Localization & Dubbing</h3>
               <h4 className="text-white font-bold text-lg mb-6 relative z-10">"Secure Global Voice"</h4>
-
               <div className="space-y-5 flex-1 relative z-10">
-                <div>
-                  <p className="text-white font-bold mb-1">Challenge:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    A dubbing studio coordinating across multiple regions may need to share sensitive scripts and unreleased audio stems with partners while maintaining strict chain of custody.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-white font-bold mb-1">Risk:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    Interception of script files or audio leaks during transfer between unverified regional partners.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-white font-bold mb-1">SnowKnights:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    We could deploy secure file transfer automation and advise on air-gapped recording booth configurations.
-                  </p>
-                </div>
+                <div><p className="text-white font-bold mb-1">Challenge:</p><p className="text-slate-400 text-sm leading-relaxed">A dubbing studio coordinating across multiple regions may need to share sensitive scripts and unreleased audio stems with partners while maintaining strict chain of custody.</p></div>
+                <div><p className="text-white font-bold mb-1">Risk:</p><p className="text-slate-400 text-sm leading-relaxed">Interception of script files or audio leaks during transfer between unverified regional partners.</p></div>
+                <div><p className="text-white font-bold mb-1">SnowKnights:</p><p className="text-slate-400 text-sm leading-relaxed">We could deploy secure file transfer automation and advise on air-gapped recording booth configurations.</p></div>
               </div>
             </div>
 
-            {/* Scenario 4: Post-Production */}
             <div className="relative p-8 rounded-3xl bg-[#0B0F19] border border-slate-800 hover:border-cyan-500/30 transition-all group flex flex-col h-full overflow-hidden">
               <div className="absolute top-0 right-0 px-4 py-1.5 bg-cyan-500 text-black text-xs font-bold rounded-bl-xl z-20 shadow-lg">For Vendors</div>
               <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity z-0">
@@ -963,38 +860,21 @@ const SnowKnightsApp = () => {
               </div>
               <h3 className="text-2xl font-bold text-cyan-400 mb-1 relative z-10">Post-Production</h3>
               <h4 className="text-white font-bold text-lg mb-6 relative z-10">"The Hybrid Edit Suite"</h4>
-
               <div className="space-y-5 flex-1 relative z-10">
-                <div>
-                  <p className="text-white font-bold mb-1">Challenge:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    A post facility transitioning to hybrid cloud editing may struggle to secure high-res footage access for distributed teams.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-white font-bold mb-1">Risk:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    Uncontrolled data egress or unauthorized access to work-in-progress cuts.
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-white font-bold mb-1">SnowKnights:</p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    We could implement secure cloud storage policies, MFA-enforced remote access, and real-time egress monitoring.
-                  </p>
-                </div>
+                <div><p className="text-white font-bold mb-1">Challenge:</p><p className="text-slate-400 text-sm leading-relaxed">A post facility transitioning to hybrid cloud editing may struggle to secure high-res footage access for distributed teams.</p></div>
+                <div><p className="text-white font-bold mb-1">Risk:</p><p className="text-slate-400 text-sm leading-relaxed">Uncontrolled data egress or unauthorized access to work-in-progress cuts.</p></div>
+                <div><p className="text-white font-bold mb-1">SnowKnights:</p><p className="text-slate-400 text-sm leading-relaxed">We could implement secure cloud storage policies, MFA-enforced remote access, and real-time egress monitoring.</p></div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* NEW: FAQ Section - REDESIGNED (Dark Card, Solid Background for visibility) */}
+      {/* NEW: FAQ Section - FIXED (Dark Card, Solid Background for visibility) */}
       <section id="faq" className="py-24 bg-slate-950">
-        {/* FIXED: max-w-7xl for consistent alignment (width constrained inside for readability) */}
-        <div className="container mx-auto px-6 max-w-7xl">
+        {/* FIXED: layoutClass */}
+        <div className={layoutClass}>
           <div className="text-left mb-12 border-b border-slate-800 pb-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-4">
               <HelpCircle className="w-3 h-3" /> Common Questions
@@ -1058,10 +938,9 @@ const SnowKnightsApp = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-gradient-to-t from-slate-900 to-slate-950">
-        {/* FIXED: max-w-7xl for consistent alignment */}
-        <div className="container mx-auto px-6 max-w-7xl">
+        {/* FIXED: layoutClass */}
+        <div className={layoutClass}>
           <div className="max-w-4xl mx-auto text-center">
-            {/* ... Keep centered layout for contact form intro as is standard for forms ... */}
             <div className="reveal-container inline-block mb-6">
               <div className="reveal-block" style={{ "--delay": "0s" }}></div>
               <h2 className="reveal-content text-4xl font-bold" style={{ "--delay": "0s" }}>Ready to Secure Your Operations?</h2>
@@ -1073,7 +952,6 @@ const SnowKnightsApp = () => {
 
             <div className="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl text-left">
               <form className="space-y-6" onSubmit={handleSubmit}>
-                {/* ... Form fields remain same ... */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-400 mb-2">Name</label>
@@ -1116,8 +994,8 @@ const SnowKnightsApp = () => {
 
       {/* Footer */}
       <footer className="bg-slate-950 py-12 border-t border-slate-900">
-        {/* FIXED: max-w-7xl for consistent alignment */}
-        <div className="container mx-auto px-6 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-6">
+        {/* FIXED: layoutClass */}
+        <div className={`${layoutClass} flex flex-col md:flex-row justify-between items-center gap-6`}>
           <div className="flex items-center gap-2">
             <Shield className="w-6 h-6 text-cyan-400" />
             <span className="font-bold tracking-tight">SnowKnights Security</span>
